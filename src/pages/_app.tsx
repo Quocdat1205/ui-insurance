@@ -4,6 +4,7 @@ import { WalletProvider } from "@provier/web3/WalletProvider";
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import Layout from "@component/shared/Layout";
+import { ContractProvider } from "@provier/contract/ContractProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   function getLibrary(provider: any): Web3Provider {
@@ -14,13 +15,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <ChakraProviders>
-        <WalletProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </WalletProvider>
-      </ChakraProviders>
+      <ContractProvider>
+        <ChakraProviders>
+          <WalletProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </WalletProvider>
+        </ChakraProviders>
+      </ContractProvider>
     </Web3ReactProvider>
   );
 }

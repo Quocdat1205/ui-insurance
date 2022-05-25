@@ -1,18 +1,54 @@
-import { ethers, providers } from "ethers";
-import { INSURANCE_ABI } from "@utils/abi/insurance";
+import InitWeb3 from "@provier/web3/Web3";
+import { BuyInsuranceType } from "@types/contract.type";
 
-export class Insurance {
-  provider: providers.Web3Provider;
+export const getTotalBuyer = async (): Promise<number> => {
+  const _ = await (await InitWeb3()).contract;
 
-  constructor(provider: providers.Web3Provider) {
-    this.provider = provider;
+  const totalBuyer = await _.methods.getTotalbuyers().call();
+
+  return totalBuyer;
+};
+
+export const getInfoBuyer = async (walletAddress: string): Promise<any> => {
+  try {
+    const _ = await (await InitWeb3()).contract;
+
+    const infoBuyer = await _.methods.getInfoBuyer(walletAddress).call();
+
+    return infoBuyer;
+  } catch (error) {
+    return false;
   }
+};
 
-  public getContract = (contractAddress: string) => {
-    return new ethers.Contract(contractAddress, INSURANCE_ABI, this.provider);
-  };
+export const BuyInsurance = async (props: BuyInsuranceType): Promise<any> => {
+  try {
+    const { walletAddress, deposit, expired, liquidation_price } = props;
+    const _ = await (await InitWeb3()).contract;
 
-  async getAmountBuyer(contractAddress: string) {
-    return await this.getContract(contractAddress).getTotalBuyers();
+    const timestamp = new Date(expired as unknown as string).getTime();
+
+    const result = await _.methods
+      .buyInsurance(`${walletAddress}`, deposit, timestamp, liquidation_price)
+      .send();
+
+    console.log(result);
+
+    return result;
+  } catch (error) {
+    console.error(error);
   }
-}
+};
+
+export const getCurrentPriceEth = async () => {
+  try {
+    const _ = await (await InitWeb3()).contract;
+
+    const current_price = await _.methods.getLatestPrice().call();
+    console.log(current_price);
+    
+    return current_price;
+  } catch (error) {
+    console.error("ERROR", error);
+  }
+};

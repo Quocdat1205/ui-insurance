@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import { Props } from "@types/common";
+import { createContext, useEffect } from "react";
+import { Props } from "@types/common.type";
 import { useWeb3React } from "@web3-react/core";
 import { injected } from "./chainID";
 import { useToast } from "@chakra-ui/react";
@@ -35,7 +35,7 @@ export const WalletProvider = ({ children }: Props) => {
   };
 
   const DisconnectWallet = async () => {
-    deactivate();
+    const test = await deactivate();
   };
 
   const value = {
