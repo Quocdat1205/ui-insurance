@@ -1,5 +1,5 @@
 import InitWeb3 from "@provier/web3/Web3";
-import { BuyInsuranceType } from "@types/contract.type";
+import { BuyInsuranceType } from "@type/contract";
 
 export const getTotalBuyer = async (): Promise<number> => {
   const _ = await (await InitWeb3()).contract;
@@ -13,10 +13,12 @@ export const getInfoBuyer = async (walletAddress: string): Promise<any> => {
   try {
     const _ = await (await InitWeb3()).contract;
 
-    const infoBuyer = await _.methods.getInfoBuyer(walletAddress).call();
+    const infoBuyer = await _.methods.getInfoBuyer(`${walletAddress}`).call();
 
     return infoBuyer;
   } catch (error) {
+    console.error(error);
+
     return false;
   }
 };
@@ -29,8 +31,8 @@ export const BuyInsurance = async (props: BuyInsuranceType): Promise<any> => {
     const timestamp = new Date(expired as unknown as string).getTime();
 
     const result = await _.methods
-      .buyInsurance(`${walletAddress}`, deposit, timestamp, liquidation_price)
-      .send();
+      .buyInsurance(`${walletAddress}`, 11111, 2222, 3333)
+      .call();
 
     console.log(result);
 
@@ -46,7 +48,7 @@ export const getCurrentPriceEth = async () => {
 
     const current_price = await _.methods.getLatestPrice().call();
     console.log(current_price);
-    
+
     return current_price;
   } catch (error) {
     console.error("ERROR", error);

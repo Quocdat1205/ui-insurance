@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Box } from "@chakra-ui/react";
-import { Props } from "@types/common.type";
+import { Props } from "@type/common";
 import { useWallet } from "@hook/useWallet";
 import ButtonConnectWallet from "./ButtonConnectWallet";
 

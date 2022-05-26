@@ -1,9 +1,9 @@
 import { createContext, useEffect } from "react";
-import { Props } from "@types/common.type";
+import { Props } from "@type/common";
 import { useWeb3React } from "@web3-react/core";
 import { injected } from "./chainID";
 import { useToast } from "@chakra-ui/react";
-import { Web3State } from "@types/web3.type";
+import { Web3State } from "@type/web3";
 
 const initValue: Web3State = {
   ConnectWallet: () => {},

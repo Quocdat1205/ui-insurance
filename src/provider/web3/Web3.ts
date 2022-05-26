@@ -4,7 +4,7 @@ import { INSURANCE_ABI } from "@utils/abi/insurance";
 
 const initWeb3 = async () => {
   const web3 = new Web3(
-    "https://ropsten.infura.io/v3/f87b967bc65a41c0a1a25635493fa482"
+    "https://kovan.infura.io/v3/f87b967bc65a41c0a1a25635493fa482"
   );
 
   const contract: any = new web3.eth.Contract(

@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { Props } from "@types/common.type";
-import { ContractType, InfoBuyerType } from "@types/contract.type";
-import { getInfoBuyer } from "src/contract/Insuranct";
+import { Props } from "@type/common";
+import { ContractType, InfoBuyerType } from "@type/contract";
+import { getInfoBuyer } from "src/contract/Insurance";
 import { useWeb3React } from "@web3-react/core";
 
 const initValue: ContractType = {
@@ -21,13 +21,14 @@ export const ContractProvider = ({ children }: Props) => {
 
   const fetchInfoBuyer = async (address: string) => {
     const _ = await getInfoBuyer(address as string);
-    console.log(_);
-    
+
     setInfoBuyer(_);
   };
 
   useEffect(() => {
-    fetchInfoBuyer(account as string);
+    if (account !== undefined) {
+      fetchInfoBuyer(account as string);
+    }
   }, [account]);
 
   const value = {

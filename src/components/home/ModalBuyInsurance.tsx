@@ -14,7 +14,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { fillBuyInsurance } from "@utils/constant";
-import { BuyInsurance, getCurrentPriceEth } from "src/contract/Insuranct";
+import { BuyInsurance, getCurrentPriceEth } from "src/contract/Insurance";
 import { useWallet } from "@hook/useWallet";
 
 const ModalBuyInsurance = ({ isOpen, onClose }: any) => {
@@ -22,18 +22,6 @@ const ModalBuyInsurance = ({ isOpen, onClose }: any) => {
   const [infoInsurance, setInfoInsurance] = useState<any>({
     walletAddress: account,
   });
-  const [current_price_eth, setCurrentPriceEth] = useState<number>(0);
-
-  useEffect(() => {
-    const fetchPrice = async () => {
-      const price = await getCurrentPriceEth();
-      console.log(price);
-      
-      // setCurrentPriceEth(price);
-    };
-
-    fetchPrice();
-  }, []);
 
   const handleBuyInsurance = async () => {
     await BuyInsurance(infoInsurance);
@@ -46,7 +34,7 @@ const ModalBuyInsurance = ({ isOpen, onClose }: any) => {
         <ModalHeader>Buy Insurance</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>Current price ETH: {current_price_eth}</Text>
+          {/* <Text>Current price ETH: {current_price_eth}</Text> */}
           {fillBuyInsurance.map((value) => {
             return (
               <FormControl marginTop="0.5rem" key={value.id}>

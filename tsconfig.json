@@ -17,10 +17,10 @@
     "baseUrl": ".",
     "paths": {
       "@provier/*": ["src/provider/*"],
-      "@types/*": ["src/types/*"],
       "@hook/*": ["src/hook/*"],
       "@component/*": ["src/components/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@type/*": ["src/types/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
